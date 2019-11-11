@@ -39,15 +39,12 @@ namespace Could_System_dev_ops.Controllers
         /// <param name="staff">The staff<see cref="Staff"/></param>
         /// <returns>The <see cref="Task{IActionResult}"/></returns>
         [HttpPost]
-        public async Task<IActionResult> AddStaff([Bind("StaffId,FirstName,LastName,Email,ContactNumebr,PayRoll")]StaffModel staff)
+        public async Task<ActionResult<StaffModel>> CreateStaff(StaffModel staff)
         {
-            if (ModelState.IsValid)
-            {
-                _StaffRepo.Add(staff);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(staff);
+            _StaffRepo.CreateStaff(staff);
+
+            return CreatedAtAction(nameof(GetStaff), new { id })
+
         }
        
     }
