@@ -32,20 +32,30 @@ namespace Could_System_dev_ops.Controllers
         {
             return View();
         }
-
-        /// <summary>
-        /// The Create
-        /// </summary>
-        /// <param name="staff">The staff<see cref="Staff"/></param>
-        /// <returns>The <see cref="Task{IActionResult}"/></returns>
         [HttpPost]
         public async Task<ActionResult<StaffModel>> CreateStaff(StaffModel staff)
         {
             _StaffRepo.CreateStaff(staff);
 
-            return CreatedAtAction(nameof(GetStaff), new { id })
+            return CreatedAtAction(nameof(GetStaff), new { id = staff.StaffId }, staff);
+
 
         }
-       
+        [Route("GetStaff / id")]
+        [HttpGet]
+        public ActionResult<StaffModel> GetStaff(int id)
+        {
+            StaffModel createstaff = _StaffRepo.GetStaff(id);
+
+            if(createstaff == null)
+            {
+                return NotFound();
+            }
+
+            return createstaff;
+        }
+        
+
+
     }
 }

@@ -21,11 +21,7 @@ namespace Could_System_dev_ops.Repo
                 new StaffModel() {StaffId = 1,FirstName = "josh", LastName = "white", ContactNumebr = 11212213129, Email = "josh_white@hotmail.co.uk", PayRoll =12533123}
             };
         }
-            
-
-
-            
-
+           
         public StaffModel CreateStaff(StaffModel staff)
         {
             _staffModelsList.Add(staff);
