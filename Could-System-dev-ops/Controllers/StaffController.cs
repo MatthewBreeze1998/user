@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Could_System_dev_ops.Models;
+using Could_System_dev_ops.Repo;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +15,10 @@ namespace Could_System_dev_ops.Controllers
 
 
 
-        private StaffModel _context;
-        public StaffController(StaffModel context)
+        private StaffRepo _StaffRepo;
+        public StaffController(StaffRepo staff)
         {
-            _context = context;
+            _StaffRepo = staff;
         }
 
 
@@ -42,7 +43,7 @@ namespace Could_System_dev_ops.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(staff);
+                _StaffRepo.Add(staff);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
