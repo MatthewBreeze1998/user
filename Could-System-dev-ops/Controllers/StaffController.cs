@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Could_System_dev_ops.Controllers
 {
+    [Route("api/Staff") ]
     public class StaffController : Controller
     {
 
@@ -41,7 +42,7 @@ namespace Could_System_dev_ops.Controllers
 
 
         }
-        [Route("GetStaff / id")]
+        [Route("GetStaff/{id}")]
         [HttpGet]
         public ActionResult<StaffModel> GetStaff(int id)
         {
