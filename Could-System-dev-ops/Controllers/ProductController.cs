@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Could_System_dev_ops.Controllers
 {
-    [Route("api/Staff") ]
+    [Route("api/Products") ]
     public class ProductsController : Controller
     {
 
