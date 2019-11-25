@@ -9,12 +9,14 @@ namespace Could_System_dev_ops.Repo
     public interface UserRepo
 
     {
-
-
         UsersModel CreateUser(Models.UsersModel User);
 
         UsersModel GetUser(int id);
 
-        IEnumerable<Models.UsersModel> GetUser(int? UserId, String FirstName, String LastName, String Email);
+        UsersModel GetUserIsActive(Boolean Active);
+        
+        IEnumerable<Models.UsersModel> GetUser(int? UserId, String FirstName, String LastName, String Email, Boolean isActive);
+    
+        
     }
 }

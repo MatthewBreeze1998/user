@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Could_System_dev_ops.Controllers
 {
-    [Route("api/User") ]
+    [Route("api/User")]
     public class UserController : Controller
     {
 
@@ -38,7 +38,7 @@ namespace Could_System_dev_ops.Controllers
         {
             _UserRepo.CreateUser(User);
 
-            return CreatedAtAction(nameof(getUser), new { id = User.UserId}, User);
+            return CreatedAtAction(nameof(getUser), new { id = User.UserId }, User);
 
 
         }
@@ -47,16 +47,29 @@ namespace Could_System_dev_ops.Controllers
         public ActionResult<UsersModel> getUser(int id)
         {
             UsersModel createUser = _UserRepo.GetUser(id);
-
-            if(createUser == null)
+            if (createUser == null)
             {
                 return NotFound();
             }
 
             return createUser;
         }
-        
 
+        [Route("GetIsActive")]
+        [HttpGet]
+        public ActionResult<UsersModel> GetIsActive(Boolean Active)
+        {
+            UsersModel createUser = _UserRepo.GetUserIsActive(Active);
+
+            if (createUser == null)
+            {
+                return NotFound();
+            }
+
+            return createUser;
+
+
+        }
 
     }
 }
