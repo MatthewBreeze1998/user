@@ -13,8 +13,8 @@ namespace Could_System_dev_ops.Models
         public String FirstName { get; set; }
         public String lastName { get; set; }
         public String Email { get; set; }
-
-        public Boolean isActive { get; set; }
+        
+        public bool isActive { get; set; }
 
 
 

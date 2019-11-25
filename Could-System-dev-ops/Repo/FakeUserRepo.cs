@@ -40,9 +40,9 @@ namespace Could_System_dev_ops.Repo
             throw new NotImplementedException();
         }
 
-        public UsersModel GetUserIsActive(Boolean Active)
+        public IEnumerable<UsersModel> GetUserIsActive()
         {
-            return _UserList.FirstOrDefault(x => Active == x.isActive);
+            return _UserList.Where(x => x.isActive);
         }
     }
 }
