@@ -13,9 +13,9 @@ namespace Could_System_dev_ops.Repo
 
         UsersModel GetUser(int id);
 
-        IEnumerable<Models.UsersModel> GetUserIsActive();
+        IEnumerable<Models.UsersModel> GetUserIsActive(Boolean Active);
        
-        IEnumerable<Models.UsersModel> GetUser(int? UserId, String FirstName, String LastName, String Email, Boolean isActive);
+        IEnumerable<Models.UsersModel> GetUser(int? UserId, string FirstName, string LastName, string Email, Boolean? isActive);
     
         
     }

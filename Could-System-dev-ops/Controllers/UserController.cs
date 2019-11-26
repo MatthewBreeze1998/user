@@ -55,20 +55,11 @@ namespace Could_System_dev_ops.Controllers
             return createUser;
         }
 
-        [Route("GetIsActive")]
+        [Route("GetIsActive/{Active}")]
         [HttpGet]
-        public ActionResult<UsersModel> GetIsActive(Boolean Active)
+        public IEnumerable<UsersModel> GetIsActive(Boolean Active)
         {
-            UsersModel createUser = _UserRepo.GetUserIsActive(Active);
-
-            if (createUser == null)
-            {
-                return NotFound();
-            }
-
-            return createUser;
-
-
+            return _UserRepo.GetUserIsActive(Active);
         }
 
     }

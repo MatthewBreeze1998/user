@@ -35,14 +35,14 @@ namespace Could_System_dev_ops.Repo
             return _UserList.FirstOrDefault(x => id == x.UserId);
         }
 
-        public IEnumerable<UsersModel> GetUser(int? UserId, String FirstName, String LastName, String Email,Boolean isActive)
+        public IEnumerable<UsersModel> GetUser(int? UserId, string FirstName, string LastName, string Email,Boolean? isActive)
         {
             return _UserList.AsEnumerable<UsersModel>();
         }
 
-        public IEnumerable<UsersModel> GetUserIsActive()
+        public IEnumerable<UsersModel> GetUserIsActive(Boolean Active)
         {
-            return _UserList.Where(x => x.isActive);
+            return _UserList.Where(x => x.isActive == Active);
         }
     }
 }
