@@ -37,7 +37,7 @@ namespace Could_System_dev_ops.Repo
 
         public IEnumerable<UsersModel> GetUser(int? UserId, String FirstName, String LastName, String Email,Boolean isActive)
         {
-            throw new NotImplementedException();
+            return _UserList.AsEnumerable<UsersModel>();
         }
 
         public IEnumerable<UsersModel> GetUserIsActive()

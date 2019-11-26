@@ -35,7 +35,7 @@ namespace Could_System_dev_ops.Repo
 
         public IEnumerable<StaffModel> GetStaff(int? StaffId, string FirstName, string LastName, string Email, double? ContactNumebr, double? PayRoll)
         {
-            throw new NotImplementedException();
+            return _staffModelsList.AsEnumerable<StaffModel>();
         }       
     
     }

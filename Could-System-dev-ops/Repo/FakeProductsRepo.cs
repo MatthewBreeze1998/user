@@ -35,7 +35,7 @@ namespace Could_System_dev_ops.Repo
 
         public IEnumerable<ProductsModel> GetProduct(int? ProductId, string ProdcutName, string Description, int? Stocklevel)
         {
-            throw new NotImplementedException();
+            return _ProductsModelsList.AsEnumerable<ProductsModel>();
         }
     }
 }

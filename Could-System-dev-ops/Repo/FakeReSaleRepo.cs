@@ -35,7 +35,7 @@ namespace Could_System_dev_ops.Repo
 
         public IEnumerable<ReSaleModel> GetReSale(int? ProductId, Double? CurrentPrice, Double? NewPrice)
         {
-            throw new NotImplementedException();
+            return _ReSaleModelList.AsEnumerable<ReSaleModel>();
         }
     }
 }
