@@ -29,7 +29,12 @@ namespace Could_System_dev_ops.Repo
             return users;
         }
 
-        
+        UsersModel GetUserByName(String Name)
+        {
+            return _UserList.FirstOrDefault(x => Name.Contains(x.FirstName + "" + x.lastName));
+        }
+
+
         public UsersModel GetUser(int id)
         {
             return _UserList.FirstOrDefault(x => id == x.UserId);
