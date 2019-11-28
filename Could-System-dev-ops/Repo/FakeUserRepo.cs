@@ -16,9 +16,9 @@ namespace Could_System_dev_ops.Repo
         {
             _UserList = new List<UsersModel>()
             {
-                new UsersModel() {UserId = 1,FirstName = "cameron", lastName = "charlton",Email = "charlton98@gmail.com", isActive = true },
-                new UsersModel() {UserId = 1,FirstName = "Shaun", lastName = "andrew",Email = "shaun_andrew@hotmail.com",isActive = false  },
-                new UsersModel() {UserId = 1,FirstName = "danielle", lastName = "houston",Email = "Danielle@outlook.com",isActive = true }
+                new UsersModel() {UserId = 1,FirstName = "cameron", lastName = "charlton",Email = "charlton98@gmail.com", isActive = true, PurchaseAbility = true },
+                new UsersModel() {UserId = 1,FirstName = "Shaun", lastName = "andrew",Email = "shaun_andrew@hotmail.com",isActive = false,  PurchaseAbility = false  },
+                new UsersModel() {UserId = 1,FirstName = "danielle", lastName = "houston",Email = "Danielle@outlook.com",isActive = true,  PurchaseAbility = false}
             };
         }
 
@@ -50,7 +50,7 @@ namespace Could_System_dev_ops.Repo
             return _UserList.Where(x => x.isActive == Active);
         }
 
-        public  UsersModel setActivity(int Id)
+        public  UsersModel SetActivity(int Id)
         {
             UsersModel activity = _UserList.FirstOrDefault(x => Id == x.UserId);
             activity.isActive = !activity.isActive;
