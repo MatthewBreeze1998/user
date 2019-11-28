@@ -9,7 +9,7 @@ namespace Could_System_dev_ops.Repo
     public interface StaffRepo
 
     {
-     
+        StaffModel DeleteStaff(int id);
 
         StaffModel CreateStaff(Models.StaffModel staff);
 

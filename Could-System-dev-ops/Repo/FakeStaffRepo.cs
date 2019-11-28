@@ -28,6 +28,14 @@ namespace Could_System_dev_ops.Repo
             return staff;
         }
 
+        public StaffModel DeleteStaff(int id)
+        {
+            StaffModel Remove = _staffModelsList.FirstOrDefault(x => id == x.StaffId);
+            _staffModelsList.Remove(_staffModelsList.FirstOrDefault(x => id == x.StaffId));
+            return Remove;
+
+        }
+
         public StaffModel GetStaff(int id)
         {
             return _staffModelsList.FirstOrDefault(x => id == x.StaffId);
