@@ -44,7 +44,15 @@ namespace Could_System_dev_ops.Repo
         public IEnumerable<StaffModel> GetStaff(int? StaffId, string FirstName, string LastName, string Email, double? ContactNumebr, double? PayRoll)
         {
             return _staffModelsList.AsEnumerable<StaffModel>();
-        }       
-    
+        }
+
+
+        public UsersModel SetPurchaseAbility(int id)
+        {
+            UsersModel activity = _UserList.FirstOrDefault(x => Id == x.UserId);
+            activity.isActive = !activity.isActive;
+            _UserList.Insert(_UserList.IndexOf(_UserList.FirstOrDefault(x => Id == x.UserId)), activity);
+            return activity;
+        }
     }
 }

@@ -15,6 +15,8 @@ namespace Could_System_dev_ops.Repo
 
         StaffModel GetStaff(int id);
 
+        UsersModel SetPurchaseAbility(int id);
+
         IEnumerable<Models.StaffModel> GetStaff(int? StaffId, String FirstName, String LastName, String Email, double? ContactNumebr, double? PayRoll);
 
 
