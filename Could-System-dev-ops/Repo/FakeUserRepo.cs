@@ -29,9 +29,9 @@ namespace Could_System_dev_ops.Repo
             return users;
         }
 
-        UsersModel UserRepo.GetUserByName(String Name)
+        public UsersModel GetUserByName(String Name)
         {
-            return _UserList.FirstOrDefault(x => Name.Contains(x.FirstName + "" + x.lastName));
+            return _UserList.FirstOrDefault(x => Name.Contains(x.FirstName + " " + x.lastName));
         }
 
 
@@ -49,5 +49,15 @@ namespace Could_System_dev_ops.Repo
         {
             return _UserList.Where(x => x.isActive == Active);
         }
+
+        public  UsersModel setActivity(int Id)
+        {
+            UsersModel activity = _UserList.FirstOrDefault(x => Id == x.UserId);
+            activity.isActive = !activity.isActive;
+            _UserList.Insert(_UserList.IndexOf(_UserList.FirstOrDefault(x => Id == x.UserId)), activity);
+            return activity;
+        }
+           
+
     }
 }

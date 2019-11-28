@@ -15,10 +15,13 @@ namespace Could_System_dev_ops.Repo
 
         UsersModel GetUserByName(String Name);
 
+
+        UsersModel SetActivity(int id);
+
         IEnumerable<Models.UsersModel> GetUserIsActive(Boolean Active);
        
         IEnumerable<Models.UsersModel> GetUser(int? UserId, string FirstName, string LastName, string Email, Boolean? isActive);
     
-        
+
     }
 }
