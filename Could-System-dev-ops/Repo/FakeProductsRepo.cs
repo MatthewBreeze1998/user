@@ -22,6 +22,8 @@ namespace Could_System_dev_ops.Repo
             };
         }
 
+
+        
         public ProductsModel CreateProduct(ProductsModel products)
         {
             _ProductsModelsList.Add(products);
@@ -36,6 +38,14 @@ namespace Could_System_dev_ops.Repo
         public IEnumerable<ProductsModel> GetProduct(int? ProductId, string ProdcutName, string Description, int? Stocklevel)
         {
             return _ProductsModelsList.AsEnumerable<ProductsModel>();
+        }
+
+        public ProductsModel UpdateStock(int id, int increase)
+        {
+           ProductsModel Update =  _ProductsModelsList.FirstOrDefault(x => id == x.ProductId);
+           Update.StockLevel = Update.StockLevel + increase;
+           _ProductsModelsList.Insert(_ProductsModelsList.IndexOf(_ProductsModelsList.FirstOrDefault(x => id == x.ProductId)), Update);
+           return Update;
         }
     }
 }
