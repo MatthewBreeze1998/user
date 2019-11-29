@@ -10,7 +10,6 @@ namespace Could_System_dev_ops.Repo
 
     {
 
-
         ReSaleModel CreateReSale(Models.ReSaleModel ReSale);
 
         ReSaleModel GetReSale(int id);

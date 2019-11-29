@@ -57,7 +57,12 @@ namespace Could_System_dev_ops.Repo
             _UserList.Insert(_UserList.IndexOf(_UserList.FirstOrDefault(x => Id == x.UserId)), activity);
             return activity;
         }
-           
 
+        public UsersModel EditUser(UsersModel User)
+        {
+            UsersModel Update = _UserList.FirstOrDefault(x => User.UserId == x.UserId);
+
+            return Update;
+        }
     }
 }

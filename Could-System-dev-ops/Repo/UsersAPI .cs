@@ -15,6 +15,7 @@ namespace Could_System_dev_ops.Repo
 
         UsersModel GetUserByName(String Name);
 
+        UsersModel EditUser(UsersModel User);
 
         UsersModel SetActivity(int id);
 
