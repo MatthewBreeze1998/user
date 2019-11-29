@@ -5,21 +5,16 @@ using System.Threading.Tasks;
 
 namespace Could_System_dev_ops.Models
 {
-    public class StaffModel
+    public class ManagementPermissionsModel
     {
-      
         public int StaffId { get; set; }
         
-        public String FirstName { get; set; }
+        public Boolean AddStaff{ get; set; }
 
-        public String LastName { get; set; }
+        public Boolean RemoveStaff { get; set; }
 
-        public String Email { get; set; }
+        public Boolean authorisePermissons{ get; set; }
 
-        public double ContactNumebr { get; set; }
-
-        public double PayRoll { get; set; }
-
-
+        public Boolean ApproveStaffPurchase { get; set; }
     }
 }
