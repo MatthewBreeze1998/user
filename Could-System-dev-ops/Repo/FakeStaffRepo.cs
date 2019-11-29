@@ -50,6 +50,7 @@ namespace Could_System_dev_ops.Repo
         public UsersModel SetPurchaseAbility(int id)
         {    
             UsersModel activity = _UserList.FirstOrDefault(x => id == x.UserId);
+
             activity.PurchaseAbility = !activity.PurchaseAbility;
             _UserList.Insert(_UserList.IndexOf(_UserList.FirstOrDefault(x => id == x.UserId)), activity);
             return activity;
