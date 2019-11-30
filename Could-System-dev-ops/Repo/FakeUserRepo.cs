@@ -40,7 +40,7 @@ namespace Could_System_dev_ops.Repo
             return _UserList.FirstOrDefault(x => id == x.UserId);
         }
 
-        public IEnumerable<UsersModel> GetUser(int? UserId, string FirstName, string LastName, string Email,Boolean? isActive)
+        public IEnumerable<UsersModel> GetUser(int? UserId, string FirstName, string LastName, string Email, Boolean? isActive, Boolean? PurchaseAbility)
         {
             return _UserList.AsEnumerable<UsersModel>();
         }
