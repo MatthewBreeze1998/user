@@ -60,9 +60,10 @@ namespace Could_System_dev_ops.Repo
 
         public UsersModel EditUser(UsersModel User)
         {
-            UsersModel Update = _UserList.FirstOrDefault(x => User.UserId == x.UserId);
+           
+            _UserList[_UserList.IndexOf(_UserList.FirstOrDefault(x => x.UserId == User.UserId))] = User;
 
-            return Update;
+            return User;
         }
     }
 }

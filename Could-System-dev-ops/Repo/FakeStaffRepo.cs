@@ -55,5 +55,11 @@ namespace Could_System_dev_ops.Repo
             _UserList.Insert(_UserList.IndexOf(_UserList.FirstOrDefault(x => id == x.UserId)), activity);
             return activity;
         }
+
+        public StaffModel EditStaff(StaffModel staff)
+        {
+            _staffModelsList[_staffModelsList.IndexOf(_staffModelsList.FirstOrDefault(x => x.StaffId == staff.StaffId))] = staff;
+            return staff;
+        }
     }
 }

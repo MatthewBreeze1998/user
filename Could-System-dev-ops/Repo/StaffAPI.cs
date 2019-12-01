@@ -19,6 +19,6 @@ namespace Could_System_dev_ops.Repo
 
         IEnumerable<Models.StaffModel> GetStaff(int? StaffId, String FirstName, String LastName, String Email, double? ContactNumebr, double? PayRoll);
 
-
+        StaffModel EditStaff(StaffModel staff);
     }
 }
