@@ -46,14 +46,28 @@ namespace Could_System_dev_ops.Controllers
         [HttpGet]
         public ActionResult<UsersModel> getUser(int id)
         {
-            UsersModel createUser = _UserRepo.GetUser(id);
-            if (createUser == null)
+            UsersModel User = _UserRepo.GetUser(id);
+            if (User == null)
             {
                 return NotFound();
             }
 
-            return createUser;
+            return User;
         }
+        [Route("GetUserByName/{Name}")]
+        [HttpGet]
+        public ActionResult<UsersModel> getUserByName(String name)
+        {
+            UsersModel users = _UserRepo.GetUserByName(name);
+            if(users == null)
+            {
+                return NotFound();
+            }
+            return users;
+
+
+        }
+
 
         [Route("GetIsActive/{Active}")]
         [HttpGet]
