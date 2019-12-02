@@ -16,6 +16,6 @@ namespace Could_System_dev_ops.Repo
 
         IEnumerable<Models.ReSaleModel> GetReSale(int? ProductId, Double? CurrentPrice, Double? NewPrice);
 
-        ProductsModel SetResale(int id);
+        
     }
 }

@@ -12,6 +12,8 @@ namespace Could_System_dev_ops.Repo
 
         private List<ProductsModel> _ProductsModelsList;
 
+        private List<ReSaleModel> _ReSaleList;
+
         public FakeProductsRepo()
         {
             _ProductsModelsList = new List<ProductsModel>()
@@ -38,6 +40,20 @@ namespace Could_System_dev_ops.Repo
         public IEnumerable<ProductsModel> GetProduct(int? ProductId, string ProdcutName, string Description, int? Stocklevel)
         {
             return _ProductsModelsList.AsEnumerable<ProductsModel>();
+        }
+
+        public ProductsModel SetResale(int id, Double NewPrice)
+        {
+            
+
+            ReSaleModel ReSalePrice = _ReSaleList.FirstOrDefault(x => x.ProductId == id);
+            ProductsModel price = _ProductsModelsList.FirstOrDefault(b => b.ProductId == id);
+            
+            price.Price = ReSalePrice.NewPrice;
+            _ProductsModelsList.Insert(_ProductsModelsList.IndexOf(_ProductsModelsList.FirstOrDefault(x => id == x.ProductId)), price);
+
+            return price;
+
         }
 
         public ProductsModel UpdateStock(int id, int increase)

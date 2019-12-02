@@ -39,13 +39,6 @@ namespace Could_System_dev_ops.Repo
             return _ReSaleModelList.AsEnumerable<ReSaleModel>();
         }
 
-        public ProductsModel SetResale(int id)
-        {
-            ProductsModel current = _productsList.FirstOrDefault(x => x.ProductId == id);
-            current.
-
-            
-            return
-        }
+        
     }
 }
