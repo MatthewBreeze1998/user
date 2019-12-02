@@ -12,6 +12,8 @@ namespace Could_System_dev_ops.Repo
 
         private List<StaffModel> _staffModelsList;
 
+        private List<StaffPermissonsModel> _staffPermissonsList;
+
         public FakeStaffRepo()
         {
             _staffModelsList = new List<StaffModel>()
@@ -20,8 +22,18 @@ namespace Could_System_dev_ops.Repo
                 new StaffModel() {StaffId = 2,FirstName = "sam", LastName = "el", ContactNumebr = 192342123429, Email = "sma_fecal@hotmail.co.uk", PayRoll = 2325243},
                 new StaffModel() {StaffId = 3,FirstName = "josh", LastName = "white", ContactNumebr = 11212213129, Email = "josh_white@hotmail.co.uk", PayRoll =12533123}
             };
+
+
+            _staffPermissonsList = new List<StaffPermissonsModel>()
+            {
+                new StaffPermissonsModel() {StaffId = 1, ViewStocklevel = true, CanDeleteUser = false, CanHideReview = true, PurchaseRequest = false, ViewOrderList = true, ViewPendingOrders = true, ViewSetReSale= false, ViewUsers = true}
+
+            };
+
         }
-           
+        
+        
+
         public StaffModel CreateStaff(StaffModel staff)
         {
             _staffModelsList.Add(staff);
