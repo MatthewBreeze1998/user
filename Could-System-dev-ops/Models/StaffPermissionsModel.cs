@@ -28,7 +28,13 @@ namespace Could_System_dev_ops.Models
 
         public Boolean ViewStocklevel { get; set; }
 
+        public Boolean AddStaff { get; set; }
 
+        public Boolean RemoveStaff { get; set; }
+
+        public Boolean authorisePermissons { get; set; }
+
+        public Boolean ApproveStaffPurchase { get; set; }
 
     }
 }

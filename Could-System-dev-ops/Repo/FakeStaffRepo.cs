@@ -14,6 +14,8 @@ namespace Could_System_dev_ops.Repo
 
         private List<StaffPermissonsModel> _staffPermissonsList;
 
+  
+
         public FakeStaffRepo()
         {
             _staffModelsList = new List<StaffModel>()
@@ -26,10 +28,14 @@ namespace Could_System_dev_ops.Repo
 
             _staffPermissonsList = new List<StaffPermissonsModel>()
             {
-                new StaffPermissonsModel() {StaffId = 1, ViewStocklevel = true, CanDeleteUser = false, CanHideReview = true, PurchaseRequest = false, ViewOrderList = true, ViewPendingOrders = true, ViewSetReSale= false, ViewUsers = true}
-
+            
+                new StaffPermissonsModel() {StaffId = 1, ViewStocklevel = true, CanDeleteUser = false, CanHideReview = true, PurchaseRequest = false, ViewOrderList = true, ViewPendingOrders = true, ViewSetReSale= false, ViewUsers = true, AddStaff = false, ApproveStaffPurchase = false, authorisePermissons = false, RemoveStaff = false , SetPurchaseAbility = false},
+                new StaffPermissonsModel() {StaffId = 2, ViewStocklevel = false, CanDeleteUser = false, CanHideReview = true, PurchaseRequest = false, ViewOrderList = false, ViewPendingOrders = false, ViewSetReSale= false, ViewUsers = true, AddStaff = false, ApproveStaffPurchase = false, authorisePermissons = false, RemoveStaff = false , SetPurchaseAbility = false},
+                new StaffPermissonsModel() {StaffId = 3, ViewStocklevel = true, CanDeleteUser = true, CanHideReview = true, PurchaseRequest = true, ViewOrderList = true, ViewPendingOrders = true, ViewSetReSale= true, ViewUsers = true, AddStaff = true, ApproveStaffPurchase = true, authorisePermissons = false, RemoveStaff = false , SetPurchaseAbility = false}
+            
             };
 
+            
         }
         
         
@@ -72,6 +78,16 @@ namespace Could_System_dev_ops.Repo
         {
             _staffModelsList[_staffModelsList.IndexOf(_staffModelsList.FirstOrDefault(x => x.StaffId == staff.StaffId))] = staff;
             return staff;
+        }
+
+        public StaffPermissonsModel GetStaffPermissions(int id)
+        {
+            return _staffPermissonsList.FirstOrDefault(x => x.StaffId == id);
+        }
+
+        public IEnumerable<StaffPermissonsModel> GetStaffPermissions(int? StaffId, Boolean CanDeleteUser, Boolean CanHideReview, Boolean SetPurchaseAbility, Boolean ViewUsers, Boolean ViewOrderList, Boolean ViewPendingOrders, Boolean ViewSetReSale, Boolean PurchaseRequest, Boolean ViewStocklevel, Boolean AddStaff, Boolean RemoveStaff, Boolean authorisePermissons, Boolean ApproveStaffPurchase)
+        {
+            return _staffPermissonsList.AsEnumerable<StaffPermissonsModel>();
         }
     }
 }
