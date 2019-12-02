@@ -16,9 +16,9 @@ namespace Could_System_dev_ops.Repo
         {
             _ProductsModelsList = new List<ProductsModel>()
             {
-                new ProductsModel() {ProductId = 1,ProductName = "levi jeans", Description  =  "blue Jeans", StockLevel = 19},
-                new ProductsModel() {ProductId = 1,ProductName = "Black desk", Description  =  "Black desk", StockLevel = 3},
-                new ProductsModel() {ProductId = 1,ProductName = "Moniter", Description  =  "24' lg 1080p", StockLevel = 19}
+                new ProductsModel() {ProductId = 1,ProductName = "levi jeans", Description  =  "blue Jeans", Price = 123.12, StockLevel = 19},
+                new ProductsModel() {ProductId = 1,ProductName = "Black desk", Description  =  "Black desk", Price = 11.4 ,StockLevel = 3},
+                new ProductsModel() {ProductId = 1,ProductName = "Moniter", Description  =  "24' lg 1080p", Price = 341.41 ,StockLevel = 19}
             };
         }
 

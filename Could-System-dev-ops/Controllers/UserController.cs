@@ -14,7 +14,7 @@ namespace Could_System_dev_ops.Controllers
     public class UserController : Controller
     {
 
-
+       
 
         private UserRepo _UserRepo;
         public UserController(UserRepo User)
@@ -33,6 +33,7 @@ namespace Could_System_dev_ops.Controllers
         {
             return View();
         }
+        [Route("CreateUser/{User}")]
         [HttpPost]
         public async Task<ActionResult<UsersModel>> CreateUser(UsersModel User)
         {
@@ -42,6 +43,8 @@ namespace Could_System_dev_ops.Controllers
 
 
         }
+       
+        
         [Route("GetUser/{id}")]
         [HttpGet]
         public ActionResult<UsersModel> getUser(int id)
@@ -54,6 +57,8 @@ namespace Could_System_dev_ops.Controllers
 
             return User;
         }
+       
+        
         [Route("GetUserByName/{Name}")]
         [HttpGet]
         public ActionResult<UsersModel> getUserByName(String name)
@@ -64,8 +69,6 @@ namespace Could_System_dev_ops.Controllers
                 return NotFound();
             }
             return users;
-
-
         }
 
 
@@ -74,6 +77,16 @@ namespace Could_System_dev_ops.Controllers
         public IEnumerable<UsersModel> GetIsActive(Boolean Active)
         {
             return _UserRepo.GetUserIsActive(Active);
+        }
+
+        [Route("SetIsActive/{Id}")]
+        [HttpPost]
+        public Task<ActionResult<UsersModel>> SetActivity(int id)
+        {
+            UsersModel Active = _UserRepo.GetUserIsActive(Boolean Active);
+
+
+            return 
         }
 
     }
