@@ -42,7 +42,7 @@ namespace Could_System_dev_ops.Repo
             return _ProductsModelsList.AsEnumerable<ProductsModel>();
         }
 
-        public ProductsModel SetResale(int id, Double NewPrice)
+        public ProductsModel SetResale(int id)
         {
             
 

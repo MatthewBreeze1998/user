@@ -17,6 +17,6 @@ namespace Could_System_dev_ops.Repo
 
         IEnumerable<Models.ProductsModel> GetProduct(int? ProductId, string ProdcutName, string Description, int? Stocklevel);
 
-        ProductsModel SetResale(int id, Double NewPrice);
+        ProductsModel SetResale(int id);
     }
 }
