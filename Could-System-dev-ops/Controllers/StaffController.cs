@@ -38,7 +38,6 @@ namespace Could_System_dev_ops.Controllers
             {
                 return NotFound();
             }
-
             return createstaff;
         }
         [Route("StaffPermissions/{id}")]
