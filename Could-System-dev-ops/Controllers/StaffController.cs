@@ -68,25 +68,26 @@ namespace Could_System_dev_ops.Controllers
         [HttpPost]
         public async Task<ActionResult<StaffModel>> DeleteStaff(int id)
         {
-            if(id == 0 )
+            if (id == 0)
             {
                 return NotFound();
 
             }
             StaffModel user = _StaffRepo.DeleteStaff(id);
-            return user; 
+            return user;
         }
         [Route("editstaff/{id}")]
         [HttpPost]
         public async Task<ActionResult<StaffModel>> EditStaff(StaffModel User)
         {
-            if(User == null )
+            if (User == null)
             {
                 return NotFound();
-            }          
+            }
             StaffModel Useredit = _StaffRepo.EditStaff(User);
             return Useredit;
         }
         
+
     }
 }
