@@ -23,16 +23,6 @@ namespace Could_System_dev_ops.Controllers
         }
 
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-
-        public IActionResult Create()
-        {
-            return View();
-        }
         [Route("CreateUser/{User}")]
         [HttpPost]
         public async Task<ActionResult<UsersModel>> CreateUser(UsersModel User)

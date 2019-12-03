@@ -52,9 +52,6 @@ namespace Could_System_dev_ops.Controllers
             StaffPermissonsModel staffPermissons = _StaffRepo.GetStaffPermissions(id);
             return staffPermissons;
         }
-
-
-
         [Route("purchaseAbility/{id}")]
         [HttpPost]
         public async Task<ActionResult<UsersModel>> SetPurchaseAbilty(int id)

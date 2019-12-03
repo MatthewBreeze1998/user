@@ -21,18 +21,6 @@ namespace Could_System_dev_ops.Controllers
         {
             _ProductsRepo = Products;
         }
-
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-
-        public IActionResult Create()
-        {
-            return View();
-        }
         [HttpPost]
         public async Task<ActionResult<ProductsModel>> CreateProdcuts(ProductsModel products)
         {
@@ -56,6 +44,31 @@ namespace Could_System_dev_ops.Controllers
             return createProdcuts;
         }
         
+        [Route("UpdateStock/{id,NewStock}")]
+        [HttpPost]
+        public async Task<ActionResult<ProductsModel>> UpdateStock(int id, int NewStock)
+        {
+            if (id <= 0)
+            {
+                return NotFound();
+            }
+            ProductsModel Updated = _ProductsRepo.UpdateStock(id,NewStock);
+            return Updated;
+        }
+
+        [Route("SetReSale/{id,NewPrice}")]
+        [HttpPost]
+        public async Task<ActionResult<ProductsModel>> SetResale(int id, int NewStock)
+        {
+            
+            if(id <= 0)
+            {
+                return NotFound();
+            }
+            ProductsModel UpdatedPrice = _ProductsRepo.SetResale(id);
+            return UpdatedPrice;
+
+        }
 
 
     }

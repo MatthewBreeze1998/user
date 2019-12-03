@@ -21,18 +21,6 @@ namespace Could_System_dev_ops.Controllers
         {
             _ReSaleRepo = ReSale;
         }
-
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-
-        public IActionResult Create()
-        {
-            return View();
-        }
         [HttpPost]
         public async Task<ActionResult<ReSaleRepo>> CreateReSale(ReSaleModel ReSale)
         {
