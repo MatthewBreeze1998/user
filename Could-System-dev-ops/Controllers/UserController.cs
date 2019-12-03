@@ -81,12 +81,15 @@ namespace Could_System_dev_ops.Controllers
 
         [Route("SetIsActive/{Id}")]
         [HttpPost]
-        public Task<ActionResult<UsersModel>> SetActivity(int id)
+        public async Task<ActionResult<UsersModel>> SetActivity(int id)
         {
-            UsersModel Active = _UserRepo.GetUserIsActive(Boolean Active);
-
-
-            return 
+           
+            if(id == 0)
+            {
+                return NotFound();
+            }
+            UsersModel Active = _UserRepo.SetActivity(id);
+            return Active;
         }
 
     }
