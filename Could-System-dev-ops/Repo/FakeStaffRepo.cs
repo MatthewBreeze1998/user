@@ -45,7 +45,6 @@ namespace Could_System_dev_ops.Repo
             _staffModelsList.Add(staff);
             return staff;
         }
-
         public StaffModel DeleteStaff(int id)
         {
             StaffModel Remove = _staffModelsList.FirstOrDefault(x => id == x.StaffId);
