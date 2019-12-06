@@ -21,6 +21,7 @@ namespace Could_System_dev_ops.Controllers
         {
             _ReSaleRepo = ReSale;
         }
+        [Route("CreateReSale/{Resale}")]
         [HttpPost]
         public async Task<ActionResult<ReSaleRepo>> CreateReSale(ReSaleModel ReSale)
         {

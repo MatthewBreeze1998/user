@@ -28,6 +28,13 @@ namespace Could_System_dev_ops.Controllers
 
 
         }
+        [Route("GetAllStaff")]
+        [HttpGet]
+        public IEnumerable<StaffModel> GetAllStaff()
+        {
+           return _StaffRepo.GetStaffAll();
+        }
+
         [Route("GetStaff/{id}")]
         [HttpGet]
         public ActionResult<StaffModel> GetStaff(int id)

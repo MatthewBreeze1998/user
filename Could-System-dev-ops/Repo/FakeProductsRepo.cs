@@ -37,7 +37,7 @@ namespace Could_System_dev_ops.Repo
             return _ProductsModelsList.FirstOrDefault(x => id == x.ProductId);
         }
 
-        public IEnumerable<ProductsModel> GetProduct(int? ProductId, string ProdcutName, string Description, int? Stocklevel)
+        public IEnumerable<ProductsModel> GetAllProduct()
         {
             return _ProductsModelsList.AsEnumerable<ProductsModel>();
         }

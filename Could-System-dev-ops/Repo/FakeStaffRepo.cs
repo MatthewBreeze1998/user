@@ -53,12 +53,13 @@ namespace Could_System_dev_ops.Repo
 
         }
 
-        public StaffModel GetStaff(int id)
+        public StaffModel GetStaff(int? id)
         {
+          
             return _staffModelsList.FirstOrDefault(x => id == x.StaffId);
         }
 
-        public IEnumerable<StaffModel> GetStaff(int? StaffId, string FirstName, string LastName, string Email, double? ContactNumebr, double? PayRoll)
+        public IEnumerable<StaffModel> GetStaffAll()
         {
             return _staffModelsList.AsEnumerable<StaffModel>();
         }

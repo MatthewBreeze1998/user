@@ -18,12 +18,13 @@ namespace Could_System_dev_ops.Repo
 
         IEnumerable<Models.StaffPermissonsModel> GetStaffPermissions(int? StaffId, Boolean CanDeleteUser, Boolean CanHideReview, Boolean SetPurchaseAbility,Boolean ViewUsers, Boolean ViewOrderList, Boolean ViewPendingOrders, Boolean ViewSetReSale, Boolean PurchaseRequest, Boolean ViewStocklevel, Boolean AddStaff, Boolean RemoveStaff, Boolean authorisePermissons, Boolean ApproveStaffPurchase);
 
-        StaffModel GetStaff(int id);
+        StaffModel GetStaff(int? id);
 
         UsersModel SetPurchaseAbility(int id);
 
-        IEnumerable<Models.StaffModel> GetStaff(int? StaffId, String FirstName, String LastName, String Email, double? ContactNumebr, double? PayRoll);
+        IEnumerable<Models.StaffModel> GetStaffAll();
 
         StaffModel EditStaff(StaffModel staff);
+
     }
 }
