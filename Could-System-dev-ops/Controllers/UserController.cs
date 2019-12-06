@@ -25,7 +25,7 @@ namespace Could_System_dev_ops.Controllers
 
         [Route("CreateUser/{User}")]
         [HttpPost]
-        public async Task<ActionResult<UsersModel>> CreateUser(UsersModel User)
+        public ActionResult<UsersModel> CreateUser(UsersModel User)
         {
             _UserRepo.CreateUser(User);
 
@@ -71,7 +71,7 @@ namespace Could_System_dev_ops.Controllers
 
         [Route("SetIsActive/{Id}")]
         [HttpPost]
-        public async Task<ActionResult<UsersModel>> SetActivity(int id)
+        public ActionResult<UsersModel> SetActivity(int id)
         {
            
             if(id == 0)

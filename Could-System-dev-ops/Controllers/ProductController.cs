@@ -24,7 +24,7 @@ namespace Could_System_dev_ops.Controllers
         }
         [Route("CreatProduct/{product}")]
         [HttpPost]
-        public async Task<ActionResult<ProductsModel>> CreateProdcuts(ProductsModel products)
+        public ActionResult<ProductsModel> CreateProdcuts(ProductsModel products)
         {
 
             if(products == null)
@@ -53,18 +53,19 @@ namespace Could_System_dev_ops.Controllers
         
         [Route("UpdateStock/{id,NewStock}")]
         [HttpPost]
-        public async Task<ActionResult<ProductsModel>> UpdateStock(int id, int NewStock)
+        public ActionResult<ProductsModel> UpdateStock(int id, int NewStock)
         {     
-            ProductsModel Updated = _ProductsRepo.UpdateStock(id,NewStock);
-            return Updated;
+             _ProductsRepo.UpdateStock(id,NewStock);
+            return CreatedAtAction(nameof(getProducts), new { id });
         }
 
         [Route("SetReSale/{id}")]
         [HttpPost]
-        public async Task<ActionResult<ProductsModel>> SetResale(int id)
+        public ActionResult<ProductsModel> SetResale(int id)
         {
-            ProductsModel UpdatedPrice = _ProductsRepo.SetResale(id);
-            return UpdatedPrice;
+
+            _ProductsRepo.SetResale(id);
+            return CreatedAtAction(nameof(getProducts), new { id });
 
         }
 
