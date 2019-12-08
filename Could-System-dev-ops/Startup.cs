@@ -30,12 +30,11 @@ namespace Could_System_dev_ops
         {
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddDbContext<ProductsDataBaseContext>(options =>
+            services.AddDbContext<UserDataBaseContext>(options =>
             {
-                String connection = Configuration.GetConnectionString("ProductsConnectionString");
+                String connection = Configuration.GetConnectionString("UserConnectionString");
                 options.UseSqlServer(connection);
             });
-            services.AddSingleton<StaffRepo, FakeStaffRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
