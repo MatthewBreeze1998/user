@@ -27,60 +27,67 @@ namespace Could_System_dev_ops.Controllers
         [HttpPost]
         public ActionResult<UsersModel> CreateUser(UsersModel User)
         {
+            
+            if(User == null)
+            {
+                return NotFound();
+            }
+            CreatedAtAction(nameof(getUser), new { id = User.UserId }, User);
             _UserRepo.CreateUser(User);
-
-            return CreatedAtAction(nameof(getUser), new { id = User.UserId }, User);
-
-
-        }
-       
-        
-        [Route("GetUser/{id}")]
-        [HttpGet]
-        public ActionResult<UsersModel> getUser(int id)
-        {
-            UsersModel User = _UserRepo.GetUser(id);
-            if (User == null)
-            {
-                return NotFound();
-            }
-
             return User;
+
+
         }
-       
-        
-        [Route("GetUserByName/{Name}")]
+
+
+        [Route("GetUser/{id,name}")]
         [HttpGet]
-        public ActionResult<UsersModel> getUserByName(String name)
+        public ActionResult<UsersModel> getUser(int id, string name)
         {
-            UsersModel users = _UserRepo.GetUserByName(name);
-            if(users == null)
+            if (id <= 0)
+            { 
+                return NotFound();
+            }
+            if(name == "")
             {
                 return NotFound();
             }
-            return users;
+            
+            UsersModel User = _UserRepo.GetUser(id,name);
+            return User;
         }
 
 
         [Route("GetIsActive/{Active}")]
         [HttpGet]
-        public IEnumerable<UsersModel> GetIsActive(Boolean Active)
+        public bool GetIsActive(UsersModel users)
         {
-            return _UserRepo.GetUserIsActive(Active);
+            UsersModel UserActive = _UserRepo.GetUser(users.UserId, users.FirstName);
+
+
+            return UserActive.isActive;
         }
 
-        [Route("SetIsActive/{Id}")]
+        [Route("SetIsActive/{user}")]
         [HttpPost]
-        public ActionResult<UsersModel> SetActivity(int id)
+        public ActionResult<UsersModel> SetActivity(UsersModel user)
         {
-           
-            if(id == 0)
+        
+            if(user == null)
             {
                 return NotFound();
             }
-            UsersModel Active = _UserRepo.SetActivity(id);
-            return Active;
+            if(user.UserId < 1 )
+            {
+                return NotFound();
+            }
+            user.isActive = !user.isActive;
+            UsersModel activity = _UserRepo.EditUser(user);
+            return activity;
+
+
         }
+           
 
     }
 }
