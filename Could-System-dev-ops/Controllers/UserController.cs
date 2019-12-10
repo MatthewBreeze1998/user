@@ -38,7 +38,14 @@ namespace Could_System_dev_ops.Controllers
 
 
         }
-
+        [Route("GetAllStaff")]
+        [HttpGet]
+        public IEnumerable<UsersModel> GetAllStaff(int? UserId, string FirstName, string LastName, string Email, Boolean? isActive, Boolean? PurchaseAbility)
+        {
+            
+            IEnumerable<UsersModel> All = _UserRepo.GetUsers(UserId, FirstName, LastName, Email, isActive, PurchaseAbility);
+            return All;
+        }
 
         [Route("GetUser/{id,name}")]
         [HttpGet]
