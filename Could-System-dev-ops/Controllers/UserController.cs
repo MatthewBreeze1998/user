@@ -11,10 +11,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Could_System_dev_ops.Controllers
 {
     [Route("api/User")]
+    [ApiController]
     public class UserController : Controller
     {
-
-       
 
         private UserRepo _UserRepo;
         public UserController(UserRepo User)
@@ -22,60 +21,66 @@ namespace Could_System_dev_ops.Controllers
             _UserRepo = User;
         }
 
-
-        [Route("CreateUser/{User}")]
+        [Route("EditUser")]
         [HttpPost]
-        public ActionResult<UsersModel> CreateUser(UsersModel User)
+        public ActionResult<UsersModel> EditUser(UsersModel User)
         {
-            
-            if(User == null)
+            if (User == null)
             {
                 return NotFound();
             }
-            CreatedAtAction(nameof(getUser), new { id = User.UserId }, User);
+
+            _UserRepo.EditUser(User);
+            return User;
+        }
+      
+        [Route("CreateUser")]
+        [HttpPost]
+        public ActionResult<UsersModel> CreateUser(UsersModel User)
+        {
+            if (User == null)
+            {
+                return NotFound();
+            }
             _UserRepo.CreateUser(User);
             return User;
-
-
         }
-        [Route("GetAllStaff")]
+       
+        [Route("GetAllUsers")]
         [HttpGet]
-        public IEnumerable<UsersModel> GetAllStaff(int? UserId, string FirstName, string LastName, string Email, Boolean? isActive, Boolean? PurchaseAbility)
-        {
-            
-            IEnumerable<UsersModel> All = _UserRepo.GetUsers(UserId, FirstName, LastName, Email, isActive, PurchaseAbility);
+        public IEnumerable<UsersModel> GetAllStaff(UsersModel users)
+        { 
+            IEnumerable<UsersModel> All = _UserRepo.GetUsers(users);
             return All;
         }
 
-        [Route("GetUser/{id,name}")]
+        [Route("GetUser/{id}")]
         [HttpGet]
-        public ActionResult<UsersModel> getUser(int id, string name)
+        public ActionResult<UsersModel> getUser(int id)
         {
             if (id <= 0)
             { 
                 return NotFound();
             }
-            if(name == "")
+           /* if(name == "")
             {
                 return NotFound();
-            }
+            }*/
             
-            UsersModel User = _UserRepo.GetUser(id,name);
+            UsersModel User = _UserRepo.GetUser(id);
             return User;
         }
 
 
-        [Route("GetIsActive/{Active}")]
+        [Route("GetIsActive/{id}")]
         [HttpGet]
-        public bool GetIsActive(UsersModel users)
+        public bool GetIsActive(int id)
         {
-            UsersModel UserActive = _UserRepo.GetUser(users.UserId, users.FirstName);
-
-
+            UsersModel UserActive = _UserRepo.GetUser(id);
             return UserActive.isActive;
         }
 
-        [Route("SetIsActive/{user}")]
+        [Route("SetIsActive")]
         [HttpPost]
         public ActionResult<UsersModel> SetActivity(UsersModel user)
         {

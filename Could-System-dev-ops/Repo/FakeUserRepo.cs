@@ -10,45 +10,41 @@ namespace Could_System_dev_ops.Repo
 
     {
 
-        private List<UsersModel> _UserList;
+        private List<UsersModel> _UserModelList;
 
         public FakeUserRepo()
         {
-            _UserList = new List<UsersModel>()
+            _UserModelList = new List<UsersModel>()
             {
-                new UsersModel() {UserId = 1,FirstName = "cameron", lastName = "charlton",Email = "charlton98@gmail.com", isActive = true, PurchaseAbility = true },
-                new UsersModel() {UserId = 1,FirstName = "Shaun", lastName = "andrew",Email = "shaun_andrew@hotmail.com",isActive = false,  PurchaseAbility = false  },
-                new UsersModel() {UserId = 1,FirstName = "danielle", lastName = "houston",Email = "Danielle@outlook.com",isActive = true,  PurchaseAbility = false}
+                new UsersModel() {UserId = 1,FirstName = "cameron", LastName = "charlton",Email = "charlton98@gmail.com", isActive = true, PurchaseAbility = true },
+                new UsersModel() {UserId = 2,FirstName = "Shaun", LastName = "andrew",Email = "shaun_andrew@hotmail.com",isActive = false,  PurchaseAbility = false },
+                new UsersModel() {UserId = 3,FirstName = "danielle", LastName = "houston",Email = "Danielle@outlook.com",isActive = true,  PurchaseAbility = false}
             };
         }
 
 
-        public UsersModel CreateUser(UsersModel users)
+        public UsersModel CreateUser(UsersModel Users)
         {
-            _UserList.Add(users);
-            return users;
+            _UserModelList.Add(Users);
+            return Users;
         }
 
-        public UsersModel GetUser(int? id, string name)
+        public UsersModel GetUser(int? id)
         {
-            if (id <= 0)
-            {
-                return _UserList.FirstOrDefault(x => name.Contains(x.FirstName + " " + x.lastName));
-            }
-            return _UserList.FirstOrDefault(x => id == x.UserId);
+         
+            return _UserModelList.FirstOrDefault(x => id == x.UserId);
         
         }
 
-        public IEnumerable<UsersModel> GetUsers(int? UserId, string FirstName, string LastName, string Email, Boolean? isActive, Boolean? PurchaseAbility)
+        public IEnumerable<UsersModel> GetUsers(UsersModel User)
         {
-            return _UserList.AsEnumerable<UsersModel>();
+            return _UserModelList.AsEnumerable<UsersModel>();
         }
 
         public UsersModel EditUser(UsersModel User)
         {
            
-            _UserList[_UserList.IndexOf(_UserList.FirstOrDefault(x => x.UserId == User.UserId))] = User;
-
+            _UserModelList[_UserModelList.IndexOf(_UserModelList.FirstOrDefault(x => x.UserId == User.UserId))] = User;
             return User;
         }
     }

@@ -35,6 +35,8 @@ namespace Could_System_dev_ops
                 String connection = Configuration.GetConnectionString("UserConnectionString");
                 options.UseSqlServer(connection);
             });
+            services.AddSingleton<UserRepo, FakeUserRepo>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

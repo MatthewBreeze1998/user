@@ -10,15 +10,11 @@ namespace Could_System_dev_ops.Repo
 
     {
 
-      //  UsersModel SetActivity(int id);
+        IEnumerable<UsersModel> GetUsers(UsersModel Users);
 
-      //  IEnumerable<Models.UsersModel> GetUserIsActive(Boolean Active);
-       
-        IEnumerable<Models.UsersModel> GetUsers(int? UserId, string FirstName, string LastName, string Email, Boolean? isActive, Boolean?  PurchaseAbility);
+        UsersModel CreateUser(UsersModel User);
 
-        UsersModel CreateUser(Models.UsersModel User);
-
-        UsersModel GetUser(int? id, string name);
+        UsersModel GetUser(int? id);
         UsersModel EditUser(UsersModel User);
 
     }
