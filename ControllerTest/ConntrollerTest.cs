@@ -78,7 +78,7 @@ namespace ControllerTest
             UsersModel user = new UsersModel() { UserId = 0, FirstName = "", LastName = "", Email = "", isActive = false , PurchaseAbility = false };
             Assert.IsNotNull(user);
 
-            int currentMaxId = _userController.GetAllUsers().Value.Max();
+            int currentMaxId = _userController.GetAllUsers().;
             Assert.GreaterOrEqual(currentMaxId, 1);
 
             ActionResult<UsersModel> result = _userController.CreateUser(user);
@@ -145,7 +145,7 @@ namespace ControllerTest
         {
             Assert.IsNotNull(_userRepo);
             Assert.IsNotNull(_userController);
-            UsersModel user = new UsersModel() { UserId = 2, FirstName = "Stella", LastName = "jones", Email = "Stella_jones@gmail.com", isActive = true, PurchaseAbility = true };
+            UsersModel user = new UsersModel() { UserId = 2, FirstName = "Shaun", LastName = "andrew", Email = "shaun_andrew@hotmail.com", isActive = false, PurchaseAbility = false };
             Assert.IsNotNull(user);
 
             ActionResult<UsersModel> result = _userController.getUser(user.UserId);
@@ -172,9 +172,111 @@ namespace ControllerTest
         [Test]
         public void GetUser_invalid_shouldObject()
         {
+            _userRepo = new FakeUserRepo(null);
+            Assert.IsNotNull(_userRepo);
+            Assert.IsNotNull(_userController);
+            UsersModel user = new UsersModel() { UserId = 0, FirstName = "", LastName = "", Email = "", isActive = false, PurchaseAbility = false };
+            Assert.IsNotNull(user);
 
+            ActionResult<UsersModel> result = _userController.getUser(user.UserId);
+            Assert.IsNotNull(result);
+
+            ActionResult usersResult = result.Result;
+            Assert.AreEqual(usersResult.GetType(), typeof(CreatedAtActionResult));
+
+            CreatedAtActionResult UpdaredUserResult = (CreatedAtActionResult)usersResult;
+            Assert.IsNotNull(UpdaredUserResult);
+            Assert.AreEqual(UpdaredUserResult.Value.GetType(), typeof(UsersModel));
+
+            UsersModel UserValue = (UsersModel)UpdaredUserResult.Value;
+            Assert.IsNotNull(UserValue);
+
+            Assert.AreNotEqual(user.UserId, UserValue.UserId);
+            Assert.AreNotEqual(user.FirstName, UserValue.FirstName);
+            Assert.AreNotEqual(user.LastName, UserValue.LastName);
+            Assert.AreNotEqual(user.Email, UserValue.Email);
+            Assert.AreNotEqual(user.isActive, UserValue.isActive);
+            Assert.AreNotEqual(user.PurchaseAbility, UserValue.PurchaseAbility);
 
 
         }
+        [Test]
+        public void getIsActive_valid_shouldObject()
+        {
+            Assert.IsNotNull(_userRepo);
+            Assert.IsNotNull(_userController);
+            UsersModel user = new UsersModel() { UserId = 2, FirstName = "Shaun", LastName = "andrew", Email = "shaun_andrew@hotmail.com", isActive = false, PurchaseAbility = false };
+            Assert.IsNotNull(user);
+
+            ActionResult<UsersModel> result = _userController.getUser(user.UserId);
+            Assert.IsNotNull(result);
+
+            ActionResult usersResult = result.Result;
+            Assert.AreEqual(usersResult.GetType(), typeof(CreatedAtActionResult));
+
+            CreatedAtActionResult UpdaredUserResult = (CreatedAtActionResult)usersResult;
+            Assert.IsNotNull(UpdaredUserResult);
+            Assert.AreEqual(UpdaredUserResult.Value.GetType(), typeof(UsersModel));
+
+            UsersModel UserValue = (UsersModel)UpdaredUserResult.Value;
+            Assert.IsNotNull(UserValue);
+
+            Assert.AreEqual(user.isActive, UserValue.isActive);
+            
+        }
+        [Test]
+        public void getIsActive_invalid_shouldObject()
+        {
+            _userRepo = new FakeUserRepo(null);
+            Assert.IsNotNull(_userRepo);
+            Assert.IsNotNull(_userController);
+            UsersModel user = new UsersModel() { UserId = 2, FirstName = "Shaun", LastName = "andrew", Email = "shaun_andrew@hotmail.com", isActive = false, PurchaseAbility = false };
+            Assert.IsNotNull(user);
+
+            ActionResult<UsersModel> result = _userController.getUser(user.UserId);
+            Assert.IsNotNull(result);
+
+            ActionResult usersResult = result.Result;
+            Assert.AreEqual(usersResult.GetType(), typeof(CreatedAtActionResult));
+
+            CreatedAtActionResult UpdaredUserResult = (CreatedAtActionResult)usersResult;
+            Assert.IsNotNull(UpdaredUserResult);
+            Assert.AreEqual(UpdaredUserResult.Value.GetType(), typeof(UsersModel));
+
+            UsersModel UserValue = (UsersModel)UpdaredUserResult.Value;
+            Assert.IsNotNull(UserValue);
+
+            Assert.AreNotEqual(user.isActive, UserValue.isActive);
+        }
+        [Test]
+        public void SetActivity_valid_shouldObject()
+        {
+            Assert.IsNotNull(_userRepo);
+            Assert.IsNotNull(_userController);
+            UsersModel user = new UsersModel() { UserId = 2, FirstName = "Shaun", LastName = "andrew", Email = "shaun_andrew@hotmail.com", isActive = false, PurchaseAbility = false };
+            Assert.IsNotNull(user);
+
+            ActionResult<UsersModel> result = _userController.getUser(user.UserId);
+            Assert.IsNotNull(result);
+
+            ActionResult usersResult = result.Result;
+            Assert.AreEqual(usersResult.GetType(), typeof(CreatedAtActionResult));
+
+            CreatedAtActionResult UpdaredUserResult = (CreatedAtActionResult)usersResult;
+            Assert.IsNotNull(UpdaredUserResult);
+            Assert.AreEqual(UpdaredUserResult.Value.GetType(), typeof(UsersModel));
+
+            UsersModel UserValue = (UsersModel)UpdaredUserResult.Value;
+            Assert.IsNotNull(UserValue);
+
+            Assert.AreNotEqual(user.isActive, UserValue.isActive);
+        }
+        [Test]
+        public void SetActivity_invalid_shouldObject()
+        {
+
+        }
+
+
     }
 }

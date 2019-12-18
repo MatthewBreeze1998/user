@@ -51,7 +51,7 @@ namespace Could_System_dev_ops.Controllers
         public IEnumerable<UsersModel> GetAllUsers()
         { 
              
-            return _UserRepo.GetAllUsers();
+            return _UserRepo.GetUsers();
         }
 
         [Route("GetUser/{id}")]
