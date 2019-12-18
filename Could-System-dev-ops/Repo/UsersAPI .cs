@@ -10,7 +10,7 @@ namespace Could_System_dev_ops.Repo
 
     {
 
-        IEnumerable<UsersModel> GetUsers(UsersModel Users);
+        IEnumerable<UsersModel> GetUsers();
 
         UsersModel CreateUser(UsersModel User);
 

@@ -36,7 +36,7 @@ namespace Could_System_dev_ops.Repo
         
         }
 
-        public IEnumerable<UsersModel> GetUsers(UsersModel User)
+        public IEnumerable<UsersModel> GetUsers()
         {
             return _UserModelList.AsEnumerable<UsersModel>();
         }

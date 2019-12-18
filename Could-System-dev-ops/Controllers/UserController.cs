@@ -48,10 +48,10 @@ namespace Could_System_dev_ops.Controllers
        
         [Route("GetAllUsers")]
         [HttpGet]
-        public IEnumerable<UsersModel> GetAllStaff(UsersModel users)
+        public IEnumerable<UsersModel> GetAllUsers()
         { 
-            IEnumerable<UsersModel> All = _UserRepo.GetUsers(users);
-            return All;
+             
+            return _UserRepo.GetAllUsers();
         }
 
         [Route("GetUser/{id}")]
@@ -61,14 +61,8 @@ namespace Could_System_dev_ops.Controllers
             if (id <= 0)
             { 
                 return NotFound();
-            }
-           /* if(name == "")
-            {
-                return NotFound();
-            }*/
-            
-            UsersModel User = _UserRepo.GetUser(id);
-            return User;
+            }     
+            return _UserRepo.GetUser(id);
         }
 
 
