@@ -4,6 +4,7 @@ using Could_System_dev_ops.Repo;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 
 namespace ControllerTest
@@ -30,7 +31,7 @@ namespace ControllerTest
                 new UsersModel() { UserId = 3, FirstName = "danielle", LastName = "houston", Email = "Danielle@outlook.com", isActive = true, PurchaseAbility = false }
             };
 
-            _userRepo = new FakeUserRepo(_UserTestData);
+            _userRepo = new FakeUserRepo();
             _userController = new UserController(_userRepo);
         }
 
@@ -44,7 +45,7 @@ namespace ControllerTest
             UsersModel user = new UsersModel() { UserId = 4, FirstName = "Stella", LastName = "jones", Email = "Stella_jones@gmail.com", isActive = true, PurchaseAbility = true };
             Assert.IsNotNull(user);
 
-            int currentMaxId = _userController.GetAllUsers().Value.Max();
+            int currentMaxId = _userController.GetAllUsers().Max();
             Assert.GreaterOrEqual(currentMaxId, 1);
 
             ActionResult<UsersModel> result = _userController.CreateUser(user);
