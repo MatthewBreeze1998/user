@@ -13,7 +13,7 @@ namespace Could_System_dev_ops.Controllers
 {
     [Route("api/User")]
     [ApiController]
-    [Authorize]
+ 
     public class UserController : Controller
     {
 
@@ -29,7 +29,7 @@ namespace Could_System_dev_ops.Controllers
         {
             if (User == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             _UserRepo.EditUser(User);
@@ -42,10 +42,10 @@ namespace Could_System_dev_ops.Controllers
         {
             if (User == null)
             {
-                return NotFound();
+                return BadRequest();
             }
             _UserRepo.CreateUser(User);
-            return User;
+            return CreatedAtAction(nameof(GetUser), new { id = User.UserId }, User);
         }
        
         [Route("GetAllUsers")]
@@ -62,9 +62,12 @@ namespace Could_System_dev_ops.Controllers
         {
             if (id <= 0)
             { 
-                return NotFound();
+                return BadRequest();
             }     
-            return _UserRepo.GetUser(id);
+          
+            UsersModel User = _UserRepo.GetUser(id);
+            return User;
+                
         }
 
 
@@ -76,7 +79,7 @@ namespace Could_System_dev_ops.Controllers
             return UserActive.isActive;
         }
 
-        [Route("SetIsActive")]
+        [Route("ToggleIsActive")]
         [HttpPost]
         public ActionResult<UsersModel> ToggleActivity(UsersModel user)
         {
