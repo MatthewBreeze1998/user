@@ -45,9 +45,6 @@ namespace ControllerTest
             UsersModel user = new UsersModel() { UserId = 4, FirstName = "Stella", LastName = "jones", Email = "Stella_jones@gmail.com", isActive = true, PurchaseAbility = true };
             Assert.IsNotNull(user);
 
-            int currentMaxId = _userController.GetAllUsers().Max();
-            Assert.GreaterOrEqual(currentMaxId, 1);
-
             ActionResult<UsersModel> result = _userController.CreateUser(user);
             Assert.IsNotNull(result);
 
@@ -61,7 +58,7 @@ namespace ControllerTest
             UsersModel UserValue = (UsersModel)createdUserResult.Value;
             Assert.IsNotNull(UserValue);
 
-            Assert.AreEqual(currentMaxId + 1, UserValue.UserId);
+            Assert.AreEqual(user.UserId, UserValue.UserId);
             Assert.AreEqual(user.FirstName, UserValue.FirstName);
             Assert.AreEqual(user.LastName, UserValue.LastName);
             Assert.AreEqual(user.Email, UserValue.Email);
@@ -72,11 +69,11 @@ namespace ControllerTest
         [Test]
         public void CreateUser_InvalidUser_ShouldObject()
         {
-            _userRepo = new FakeUserRepo(null);
+          
 
             Assert.IsNotNull(_userRepo);
             Assert.IsNotNull(_userController);
-            UsersModel user = new UsersModel() { UserId = 0, FirstName = "", LastName = "", Email = "", isActive = false , PurchaseAbility = false };
+            UsersModel user = null;
             Assert.IsNotNull(user);
 
             int currentMaxId = _userController.GetAllUsers().;
@@ -141,7 +138,7 @@ namespace ControllerTest
             UsersModel Updateduser = new UsersModel() { UserId = 0, FirstName = "", LastName = "", Email = "", isActive = false, PurchaseAbility = false };
             Assert.IsNotNull(Updateduser);
 
-            ActionResult<UsersModel> current = _userController.getUser(Updateduser.UserId);
+            ActionResult<UsersModel> current = _userController.GetUser(Updateduser.UserId);
             Assert.IsNotNull(current);
 
             ActionResult<UsersModel> result = _userController.EditUser(Updateduser);
@@ -173,7 +170,7 @@ namespace ControllerTest
             UsersModel user = new UsersModel() { UserId = 2, FirstName = "Shaun", LastName = "andrew", Email = "shaun_andrew@hotmail.com", isActive = false, PurchaseAbility = false };
             Assert.IsNotNull(user);
 
-            ActionResult<UsersModel> result = _userController.getUser(user.UserId);
+            ActionResult<UsersModel> result = _userController.GetUser(user.UserId);
             Assert.IsNotNull(result);
 
             ActionResult usersResult = result.Result;
@@ -197,13 +194,13 @@ namespace ControllerTest
         [Test]
         public void GetUser_invalid_shouldObject()
         {
-            _userRepo = new FakeUserRepo(null);
+            
             Assert.IsNotNull(_userRepo);
             Assert.IsNotNull(_userController);
-            UsersModel user = new UsersModel() { UserId = 0, FirstName = "", LastName = "", Email = "", isActive = false, PurchaseAbility = false };
+            UsersModel user = null;
             Assert.IsNotNull(user);
 
-            ActionResult<UsersModel> result = _userController.getUser(user.UserId);
+            ActionResult<UsersModel> result = _userController.GetUser(user.UserId);
             Assert.IsNotNull(result);
 
             ActionResult usersResult = result.Result;
@@ -233,7 +230,7 @@ namespace ControllerTest
             UsersModel user = new UsersModel() { UserId = 2, FirstName = "Shaun", LastName = "andrew", Email = "shaun_andrew@hotmail.com", isActive = false, PurchaseAbility = false };
             Assert.IsNotNull(user);
 
-            ActionResult<UsersModel> result = _userController.getUser(user.UserId);
+            ActionResult<UsersModel> result = _userController.GetUser(user.UserId);
             Assert.IsNotNull(result);
 
             ActionResult usersResult = result.Result;
@@ -252,13 +249,13 @@ namespace ControllerTest
         [Test]
         public void getIsActive_invalid_shouldObject()
         {
-            _userRepo = new FakeUserRepo(null);
+            
             Assert.IsNotNull(_userRepo);
             Assert.IsNotNull(_userController);
-            UsersModel user = new UsersModel() { UserId = 2, FirstName = "Shaun", LastName = "andrew", Email = "shaun_andrew@hotmail.com", isActive = false, PurchaseAbility = false };
+            UsersModel user = null;
             Assert.IsNotNull(user);
 
-            ActionResult<UsersModel> result = _userController.getUser(user.UserId);
+            ActionResult<UsersModel> result = _userController.GetUser(user.UserId);
             Assert.IsNotNull(result);
 
             ActionResult usersResult = result.Result;
@@ -281,7 +278,7 @@ namespace ControllerTest
             UsersModel user = new UsersModel() { UserId = 2, FirstName = "Shaun", LastName = "andrew", Email = "shaun_andrew@hotmail.com", isActive = false, PurchaseAbility = false };
             Assert.IsNotNull(user);
 
-            ActionResult<UsersModel> result = _userController.getUser(user.UserId);
+            ActionResult<UsersModel> result = _userController.GetUser(user.UserId);
             Assert.IsNotNull(result);
 
             ActionResult usersResult = result.Result;
@@ -304,7 +301,7 @@ namespace ControllerTest
             UsersModel user = new UsersModel() { UserId = 2, FirstName = "Shaun", LastName = "andrew", Email = "shaun_andrew@hotmail.com", isActive = false, PurchaseAbility = false };
             Assert.IsNotNull(user);
 
-            ActionResult<UsersModel> result = _userController.getUser(user.UserId);
+            ActionResult<UsersModel> result = _userController.GetUser(user.UserId);
             Assert.IsNotNull(result);
 
             ActionResult usersResult = result.Result;
@@ -319,7 +316,5 @@ namespace ControllerTest
 
             Assert.AreNotEqual(user.isActive, UserValue.isActive);
         }
-
-
     }
 }

@@ -58,7 +58,7 @@ namespace Could_System_dev_ops.Controllers
 
         [Route("GetUser/{id}")]
         [HttpGet]
-        public ActionResult<UsersModel> getUser(int id)
+        public ActionResult<UsersModel> GetUser(int id)
         {
             if (id <= 0)
             { 
@@ -78,7 +78,7 @@ namespace Could_System_dev_ops.Controllers
 
         [Route("SetIsActive")]
         [HttpPost]
-        public ActionResult<UsersModel> SetActivity(UsersModel user)
+        public ActionResult<UsersModel> ToggleActivity(UsersModel user)
         {
         
             if(user == null)
