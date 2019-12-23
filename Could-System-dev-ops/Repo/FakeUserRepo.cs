@@ -32,7 +32,9 @@ namespace Could_System_dev_ops.Repo
         public UsersModel GetUser(int? id)
         {
          
-            return _UserModelList.FirstOrDefault(x => id == x.UserId);
+            UsersModel User = _UserModelList.FirstOrDefault(x => id == x.UserId);
+
+            return User;
         
         }
 

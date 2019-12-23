@@ -33,14 +33,14 @@ namespace Could_System_dev_ops.Controllers
             }
 
             _UserRepo.EditUser(User);
-            return User;
+            return CreatedAtAction(nameof(GetUser), new { id = User.UserId }, User);
         }
       
         [Route("CreateUser")]
         [HttpPost]
         public ActionResult<UsersModel> CreateUser(UsersModel User)
         {
-            if (User == null)
+            if(User == null)
             {
                 return BadRequest();
             }
@@ -58,16 +58,15 @@ namespace Could_System_dev_ops.Controllers
 
         [Route("GetUser/{id}")]
         [HttpGet]
-        public ActionResult<UsersModel> GetUser(int id)
+        public ActionResult<UsersModel> GetUser(int? id)
         {
-            if (id <= 0)
+            if (id == null)
             { 
                 return BadRequest();
             }     
           
             UsersModel User = _UserRepo.GetUser(id);
-            return User;
-                
+            return CreatedAtAction(nameof(GetUser), new { id = User.UserId }, User);
         }
 
 
