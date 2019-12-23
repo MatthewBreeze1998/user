@@ -86,11 +86,11 @@ namespace Could_System_dev_ops.Controllers
         
             if(user == null)
             {
-                return NotFound();
+                return BadRequest();
             }
             if(user.UserId < 1 )
             {
-                return NotFound();
+                return BadRequest();
             }
             user.isActive = !user.isActive;
             UsersModel activity = _UserRepo.EditUser(user);
