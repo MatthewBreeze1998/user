@@ -44,6 +44,11 @@ namespace Could_System_dev_ops.Controllers
             {
                 return BadRequest();
             }
+
+            int newId = _UserRepo.GetUsers().Max(x => x.UserId + 1);// gats max id and adds one
+            User.UserId = newId; // sets new id
+
+
             _UserRepo.CreateUser(User);
             return CreatedAtAction(nameof(GetUser), new { id = User.UserId }, User);
         }

@@ -45,6 +45,10 @@ namespace ControllerTest
             UsersModel user = new UsersModel() { UserId = 4, FirstName = "Stella", LastName = "jones", Email = "Stella_jones@gmail.com", isActive = true, PurchaseAbility = true };
             Assert.IsNotNull(user);
 
+            int currentMaxId = _userController.GetAllUsers().Max(x => x.UserId);
+            Assert.GreaterOrEqual(currentMaxId, 1);
+
+
             ActionResult<UsersModel> result = _userController.CreateUser(user);
             Assert.IsNotNull(result);
 
@@ -58,7 +62,7 @@ namespace ControllerTest
             UsersModel UserValue = (UsersModel)createdUserResult.Value;
             Assert.IsNotNull(UserValue);
 
-            Assert.AreEqual(user.UserId, UserValue.UserId);
+            Assert.AreEqual(currentMaxId, UserValue.UserId);
             Assert.AreEqual(user.FirstName, UserValue.FirstName);
             Assert.AreEqual(user.LastName, UserValue.LastName);
             Assert.AreEqual(user.Email, UserValue.Email);
