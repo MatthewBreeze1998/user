@@ -31,9 +31,7 @@ namespace Could_System_dev_ops.Controllers
             {
                 return BadRequest();
             }
-
-            _UserRepo.EditUser(User);
-            return CreatedAtAction(nameof(GetUser), new { id = User.UserId }, User);
+            return _UserRepo.EditUser(User);
         }
       
         [Route("CreateUser")]
@@ -71,7 +69,7 @@ namespace Could_System_dev_ops.Controllers
             }     
           
             UsersModel User = _UserRepo.GetUser(id);
-            return CreatedAtAction(nameof(GetUser), new { id = User.UserId }, User);
+            return User;
         }
 
 
