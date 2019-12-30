@@ -23,18 +23,9 @@ namespace Could_System_dev_ops.Controllers
             _UserRepo = User;
         }
 
-        [Route("EditUser")]
-        [HttpPost]
-        public ActionResult<UsersModel> EditUser(UsersModel User)
-        {
-            if (User == null)
-            {
-                return BadRequest();
-            }
-            return _UserRepo.EditUser(User);
-        }
+   
       
-        [Route("CreateUser")]
+        [Route("CreateUser")]// create user route 
         [HttpPost]
         public ActionResult<UsersModel> CreateUser(UsersModel User)
         {
@@ -47,41 +38,61 @@ namespace Could_System_dev_ops.Controllers
             User.UserId = newId; // sets new id
 
 
-            _UserRepo.CreateUser(User);
-            return CreatedAtAction(nameof(GetUser), new { id = User.UserId }, User);
+            _UserRepo.CreateUser(User);// calls the function to create a new User
+            return CreatedAtAction(nameof(GetUser), new { id = User.UserId }, User); // create at action creats a new user 
         }
-       
-        [Route("GetAllUsers")]
+        [Route("DeleteUser/")]
+        public ActionResult<UsersModel> DeleteUser(UsersModel User)
+        {
+            if(User == null)
+            {
+                return BadRequest();
+            }// checks user is not null
+            return _UserRepo.DeleteUser(User); // calls delete fumction
+        }
+
+        [Route("EditUser")] // edit User route
+        [HttpPost]
+        public ActionResult<UsersModel> EditUser(UsersModel User)
+        {
+            if (User == null)
+            {
+                return BadRequest();
+            }// checks if there is a valid User
+            return _UserRepo.EditUser(User);// calls edit user and returns edit user
+        }
+
+        [Route("GetAllUsers")] // get all users route
         [HttpGet]
         public IEnumerable<UsersModel> GetAllUsers()
         { 
              
-            return _UserRepo.GetUsers();
+            return _UserRepo.GetUsers(); // retruns all users as a list
         }
 
-        [Route("GetUser/{id}")]
+        [Route("GetUser/{id}")]// user by id route
         [HttpGet]
         public ActionResult<UsersModel> GetUser(int? id)
         {
             if (id == null)
             { 
                 return BadRequest();
-            }     
+            }// checks if is a valid id     
           
-            UsersModel User = _UserRepo.GetUser(id);
-            return User;
+            UsersModel User = _UserRepo.GetUser(id);// checks for user
+            return User; // retunrs users model
         }
 
 
-        [Route("GetIsActive/{id}")]
+        [Route("GetIsActive/{id}")]// get active by id route
         [HttpGet]
         public bool GetIsActive(int id)
         {
-            UsersModel UserActive = _UserRepo.GetUser(id);
-            return UserActive.isActive;
+            UsersModel UserActive = _UserRepo.GetUser(id); //gets user by id 
+            return UserActive.isActive;// returns is active paramiter
         }
 
-        [Route("ToggleIsActive")]
+        [Route("ToggleIsActive")]// toggle active route
         [HttpPost]
         public ActionResult<UsersModel> ToggleActivity(UsersModel user)
         {
@@ -89,14 +100,10 @@ namespace Could_System_dev_ops.Controllers
             if(user == null)
             {
                 return BadRequest();
-            }
-            if(user.UserId < 1 )
-            {
-                return BadRequest();
-            }
-            user.isActive = !user.isActive;
-            UsersModel activity = _UserRepo.EditUser(user);
-            return activity;
+            }// checks valid user
+            user.isActive = !user.isActive;// toggles is active
+            UsersModel activity = _UserRepo.EditUser(user);// creates new user model and passes through user
+            return activity;// return the edited user
 
 
         }

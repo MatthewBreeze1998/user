@@ -12,5 +12,6 @@ namespace Could_System_dev_ops.Repo
         UsersModel CreateUser(UsersModel User);
         UsersModel GetUser(int? id);
         UsersModel EditUser(UsersModel User);
+        UsersModel DeleteUser(UsersModel User);
     }
 }

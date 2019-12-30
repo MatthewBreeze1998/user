@@ -29,6 +29,12 @@ namespace Could_System_dev_ops.Repo
             return Users;
         }
 
+        public UsersModel DeleteUser(UsersModel User)
+        {
+            _UserModelList.Remove(_UserModelList.FirstOrDefault(x => x.UserId == User.UserId));
+            return User;
+        }
+
         public UsersModel GetUser(int? id)
         {
          
@@ -49,5 +55,7 @@ namespace Could_System_dev_ops.Repo
             _UserModelList[_UserModelList.IndexOf(_UserModelList.FirstOrDefault(x => x.UserId == User.UserId))] = User;
             return User;
         }
+
+     
     }
 }
