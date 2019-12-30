@@ -22,9 +22,6 @@ namespace Could_System_dev_ops.Controllers
         {
             _UserRepo = User;
         }
-
-   
-      
         [Route("CreateUser")]// create user route 
         [HttpPost]
         public ActionResult<UsersModel> CreateUser(UsersModel User)
