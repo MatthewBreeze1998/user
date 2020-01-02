@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Could-System-dev-ops\Users.csproj" />
+    <ProjectReference Include="..\Cloud-System-dev-ops\Users.csproj" />
   </ItemGroup>
 
 </Project>
