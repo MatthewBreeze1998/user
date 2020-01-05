@@ -29,12 +29,12 @@ namespace Cloud_System_dev_ops
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            JwtSecurityTokenHandler.DefaultInboundClaimFilter.Clear();
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
-                    options.Authority = "https://localhost:44387/";
+                    options.Authority = Configuration.GetSection("UrlConnections")["Auth"];
                     options.Audience = "Api_Link";
                 });
 
