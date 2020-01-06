@@ -22,7 +22,7 @@ namespace Cloud_System_dev_ops.Controllers
         {
             _UserRepo = User;
         }
-       
+        [Authorize(Policy = "Staffpol")]
         [Route("CreateUser")]// create user route 
         [HttpPost]
         public ActionResult<UsersModel> CreateUser(UsersModel User)
@@ -39,6 +39,7 @@ namespace Cloud_System_dev_ops.Controllers
             _UserRepo.CreateUser(User);// calls the function to create a new User
             return CreatedAtAction(nameof(GetUser), new { id = User.UserId }, User); // create at action creats a new user 
         }
+        [Authorize(Policy = "Staffpol")]
         [Route("DeleteUser/")]
         public ActionResult<UsersModel> DeleteUser(UsersModel User)
         {
@@ -48,7 +49,7 @@ namespace Cloud_System_dev_ops.Controllers
             }// checks user is not null
             return _UserRepo.DeleteUser(User); // calls delete fumction
         }
-
+        [Authorize(Policy = "Staffpol")]
         [Route("EditUser")] // edit User route
         [HttpPost]
         public ActionResult<UsersModel> EditUser(UsersModel User)
@@ -59,7 +60,7 @@ namespace Cloud_System_dev_ops.Controllers
             }// checks if there is a valid User
             return _UserRepo.EditUser(User);// calls edit user and returns edit user
         }
-
+        [Authorize(Policy = "Staffpol")]
         [Route("GetAllUsers")] // get all users route
         [HttpGet]
         public IEnumerable<UsersModel> GetAllUsers()
@@ -67,7 +68,7 @@ namespace Cloud_System_dev_ops.Controllers
              
             return _UserRepo.GetUsers(); // retruns all users as a list
         }
-
+        [Authorize(Policy = "Staffpol")]
         [Route("GetUser/{id}")]// user by id route
         [HttpGet]
         public ActionResult<UsersModel> GetUser(int? id)
@@ -81,7 +82,7 @@ namespace Cloud_System_dev_ops.Controllers
             return User; // retunrs users model
         }
 
-
+        [Authorize(Policy = "Staffpol")]
         [Route("GetIsActive/{id}")]// get active by id route
         [HttpGet]
         public bool GetIsActive(int id)
@@ -89,12 +90,11 @@ namespace Cloud_System_dev_ops.Controllers
             UsersModel UserActive = _UserRepo.GetUser(id); //gets user by id 
             return UserActive.isActive;// returns is active paramiter
         }
-
+        [Authorize(Policy = "Staffpol")]
         [Route("ToggleIsActive")]// toggle active route
         [HttpPost]
         public ActionResult<UsersModel> ToggleActivity(UsersModel user)
         {
-        
             if(user == null)
             {
                 return BadRequest();
@@ -102,10 +102,6 @@ namespace Cloud_System_dev_ops.Controllers
             user.isActive = !user.isActive;// toggles is active
             UsersModel activity = _UserRepo.EditUser(user);// creates new user model and passes through user
             return activity;// return the edited user
-
-
         }
-           
-
     }
 }
