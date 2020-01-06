@@ -49,7 +49,7 @@ namespace Cloud_System_dev_ops.Controllers
             }// checks user is not null
             return _UserRepo.DeleteUser(User); // calls delete fumction
         }
-        [Authorize(Policy = "Staffpol")]
+        [Authorize]
         [Route("EditUser")] // edit User route
         [HttpPost]
         public ActionResult<UsersModel> EditUser(UsersModel User)
@@ -60,7 +60,7 @@ namespace Cloud_System_dev_ops.Controllers
             }// checks if there is a valid User
             return _UserRepo.EditUser(User);// calls edit user and returns edit user
         }
-        [Authorize(Policy = "Staffpol")]
+        [Authorize]
         [Route("GetAllUsers")] // get all users route
         [HttpGet]
         public IEnumerable<UsersModel> GetAllUsers()
@@ -68,7 +68,7 @@ namespace Cloud_System_dev_ops.Controllers
              
             return _UserRepo.GetUsers(); // retruns all users as a list
         }
-        [Authorize(Policy = "Staffpol")]
+        [Authorize]
         [Route("GetUser/{id}")]// user by id route
         [HttpGet]
         public ActionResult<UsersModel> GetUser(int? id)
