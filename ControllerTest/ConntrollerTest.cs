@@ -210,7 +210,7 @@ namespace ControllerTest
             UsersModel usersResult = result.Value;// userresult is result.value
             Assert.IsNotNull(usersResult);// check usersresult is not null
 
-            Assert.AreEqual(user.isActive, usersResult.isActive);// checks are equal
+            Assert.AreNotEqual(user.isActive, usersResult.isActive);// checks are equal
         }
         [Test]
         public void SetActivity_invalid_shouldObject()
