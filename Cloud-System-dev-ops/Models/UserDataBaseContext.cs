@@ -16,11 +16,5 @@ namespace Cloud_System_dev_ops.Models
         {
             Database.Migrate();
         }
-
-
-
-
-
-
     }
 }

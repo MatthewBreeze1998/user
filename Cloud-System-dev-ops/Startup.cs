@@ -60,11 +60,10 @@ namespace Cloud_System_dev_ops
                 String connection = Configuration.GetConnectionString("UserConnectionString");
                 options.UseSqlServer(connection);
             });
-
-
             if(CurrentEnvironment.IsDevelopment())
             {
-                services.AddSingleton<IRepository<UsersModel>, FakeUserRepo>();
+                //services.AddSingleton<IRepository<UsersModel>, FakeUserRepo>();
+                services.AddSingleton<IRepository<UsersModel>, EntityFrameWorkUserRepositry>();
             }
             else
             {
