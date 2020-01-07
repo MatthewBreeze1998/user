@@ -40,11 +40,25 @@ namespace Cloud_System_dev_ops.Controllers
         [HttpPost]
         public ActionResult<UsersModel> DeleteUser(UsersModel User)
         {
-            if(User == null)
+            if (User == null)
             {
                 return BadRequest();
-            }// checks user is not null
-            return _UserRepo.DeleteObject(User); // calls delete fumction
+            }// checks if there is a valid User
+
+            UsersModel livemodel = _UserRepo.GetObjects().FirstOrDefault(x => x.UserId == User.UserId);// checks for user
+
+            if (livemodel == null)
+            {
+                return BadRequest();
+            }
+            livemodel = _UserRepo.DeleteObject(livemodel);// calls edit user and returns edit user
+
+            if (livemodel != null)
+            {
+                return Conflict();
+            }
+
+            return livemodel;
         }
         [Authorize]
         [Route("EditUser")] // edit User route
@@ -55,7 +69,28 @@ namespace Cloud_System_dev_ops.Controllers
             {
                 return BadRequest();
             }// checks if there is a valid User
-            return _UserRepo.UpdateObject(User);// calls edit user and returns edit user
+           
+            UsersModel livemodel = _UserRepo.GetObjects().FirstOrDefault(x => x.UserId == User.UserId);// checks for user
+           
+            if(livemodel == null)
+            {
+                return BadRequest();
+            }
+
+            livemodel.FirstName = User.FirstName;
+            livemodel.LastName = User.LastName;
+            livemodel.Email = User.Email;
+            livemodel.isActive = User.isActive;
+            livemodel.PurchaseAbility = User.PurchaseAbility;
+            
+            livemodel = _UserRepo.UpdateObject(livemodel);// calls edit user and returns edit user
+
+            if(livemodel == null)
+            {
+                return Conflict();
+            }
+
+            return livemodel;  
         }
         [Authorize]
         [Route("GetAllUsers")] // get all users route
@@ -76,6 +111,13 @@ namespace Cloud_System_dev_ops.Controllers
             }// checks if is a valid id     
           
             UsersModel User = _UserRepo.GetObjects().FirstOrDefault(x => x.UserId == id);// checks for user
+            
+            if(User == null)
+            {
+                return BadRequest();
+
+            }
+
             return User; // retunrs users model
         }
 
@@ -96,8 +138,23 @@ namespace Cloud_System_dev_ops.Controllers
             {
                 return BadRequest();
             }// checks valid user
-            user.isActive = !user.isActive;// toggles is active
-            UsersModel activity = _UserRepo.UpdateObject(user);// creates new user model and passes through user
+
+            UsersModel livemodel = _UserRepo.GetObjects().FirstOrDefault(x => x.UserId == user.UserId);// checks for user
+
+            if (livemodel == null)
+            {
+                return BadRequest();
+            }
+
+            livemodel.isActive = !livemodel.isActive;// toggles is active
+            
+            UsersModel activity = _UserRepo.UpdateObject(livemodel);// creates new user model and passes through user
+
+            if (activity == null)
+            {
+                return Conflict();
+            }
+
             return activity;// return the edited user
         }
     }
