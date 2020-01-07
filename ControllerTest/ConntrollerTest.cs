@@ -12,7 +12,7 @@ namespace ControllerTest
     public class UserControllerTest
     {
         private HttpClient _client;
-        private UserRepo _userRepo;
+        private IRepository<UsersModel> _userRepo;
         private UserController _userController;
         private List<UsersModel> _UserTestData;
 

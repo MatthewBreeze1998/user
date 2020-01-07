@@ -25,12 +25,28 @@ namespace Cloud_System_dev_ops.Repo
 
             return Object;
         }
-        public IEnumerable<UsersModel> GetObject()
+
+        public UsersModel DeleteObject(UsersModel Object)
+        {
+            try
+            {
+                _context.User.Remove(Object);
+                _context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                return Object;
+            }
+
+            return null;
+        }
+
+        public IEnumerable<UsersModel> GetObjects()
         {
             return _context.User;
         }
 
-        public bool UpdateObject(UsersModel Object)
+        public UsersModel UpdateObject(UsersModel Object)
         {
             try
             {
@@ -39,9 +55,10 @@ namespace Cloud_System_dev_ops.Repo
             }
             catch (Exception ex)
             {
-                return false;
+                return null;
             }
-            return true;
+
+            return Object;
         }
     }
 }

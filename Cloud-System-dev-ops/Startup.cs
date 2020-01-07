@@ -19,12 +19,14 @@ namespace Cloud_System_dev_ops
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            CurrentEnvironment = env;
         }
 
         public IConfiguration Configuration { get; }
+        public IHostingEnvironment CurrentEnvironment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -58,7 +60,16 @@ namespace Cloud_System_dev_ops
                 String connection = Configuration.GetConnectionString("UserConnectionString");
                 options.UseSqlServer(connection);
             });
-            services.AddSingleton<UserRepo, FakeUserRepo>();
+
+
+            if(CurrentEnvironment.IsDevelopment())
+            {
+                services.AddSingleton<IRepository<UsersModel>, FakeUserRepo>();
+            }
+            else
+            {
+                services.AddSingleton<IRepository<UsersModel>, EntityFrameWorkUserRepositry>();
+            }
 
         }
 

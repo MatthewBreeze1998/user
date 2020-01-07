@@ -6,7 +6,7 @@ using Cloud_System_dev_ops.Models;
 
 namespace Cloud_System_dev_ops.Repo
 {
-    public class FakeUserRepo : UserRepo
+    public class FakeUserRepo : IRepository<UsersModel>
 
     {
 
@@ -23,39 +23,50 @@ namespace Cloud_System_dev_ops.Repo
         }
 
 
-        public UsersModel CreateUser(UsersModel Users)
+        public UsersModel CreateObject(UsersModel Users)
         {
+            Users.UserId = GetNextId();
+
             _UserModelList.Add(Users);
             return Users;
         }
 
-        public UsersModel DeleteUser(UsersModel User)
+        public IEnumerable<UsersModel> GetObjects()
+        {
+            return _UserModelList.AsEnumerable<UsersModel>();
+        }
+
+        public UsersModel UpdateObject(UsersModel User)
+        {
+            UsersModel inMemoryModel = _UserModelList.FirstOrDefault(x => x.UserId == User.UserId);
+
+            if(inMemoryModel == null)
+            {
+                return null;
+            }
+
+            try
+            {
+                int index = _UserModelList.IndexOf(inMemoryModel);
+                _UserModelList[index] = User;
+
+                return User;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public UsersModel DeleteObject(UsersModel User)
         {
             _UserModelList.Remove(_UserModelList.FirstOrDefault(x => x.UserId == User.UserId));
             return User;
         }
 
-        public UsersModel GetUser(int? id)
+        private int GetNextId()
         {
-         
-            UsersModel User = _UserModelList.FirstOrDefault(x => id == x.UserId);
-
-            return User;
-        
+            return (_UserModelList == null || _UserModelList.Count() == 0) ? 1 : _UserModelList.Max(x => x.UserId) + 1;
         }
-
-        public IEnumerable<UsersModel> GetUsers()
-        {
-            return _UserModelList.AsEnumerable<UsersModel>();
-        }
-
-        public UsersModel EditUser(UsersModel User)
-        {
-           
-            _UserModelList[_UserModelList.IndexOf(_UserModelList.FirstOrDefault(x => x.UserId == User.UserId))] = User;
-            return User;
-        }
-
-     
     }
 }

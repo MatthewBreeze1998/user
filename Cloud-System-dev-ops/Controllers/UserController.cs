@@ -17,8 +17,8 @@ namespace Cloud_System_dev_ops.Controllers
     public class UserController : Controller
     {
 
-        private UserRepo _UserRepo;
-        public UserController(UserRepo User)
+        private IRepository<UsersModel> _UserRepo;
+        public UserController(IRepository<UsersModel> User)
         {
             _UserRepo = User;
         }
@@ -32,22 +32,19 @@ namespace Cloud_System_dev_ops.Controllers
                 return BadRequest();
             }
 
-            int newId = _UserRepo.GetUsers().Max(x => x.UserId + 1);// gats max id and adds one
-            User.UserId = newId; // sets new id
-
-
-            _UserRepo.CreateUser(User);// calls the function to create a new User
+            _UserRepo.CreateObject(User);// calls the function to create a new User
             return CreatedAtAction(nameof(GetUser), new { id = User.UserId }, User); // create at action creats a new user 
         }
         [Authorize(Policy = "Staffpol")]
         [Route("DeleteUser/")]
+        [HttpPost]
         public ActionResult<UsersModel> DeleteUser(UsersModel User)
         {
             if(User == null)
             {
                 return BadRequest();
             }// checks user is not null
-            return _UserRepo.DeleteUser(User); // calls delete fumction
+            return _UserRepo.DeleteObject(User); // calls delete fumction
         }
         [Authorize]
         [Route("EditUser")] // edit User route
@@ -58,7 +55,7 @@ namespace Cloud_System_dev_ops.Controllers
             {
                 return BadRequest();
             }// checks if there is a valid User
-            return _UserRepo.EditUser(User);// calls edit user and returns edit user
+            return _UserRepo.UpdateObject(User);// calls edit user and returns edit user
         }
         [Authorize]
         [Route("GetAllUsers")] // get all users route
@@ -66,7 +63,7 @@ namespace Cloud_System_dev_ops.Controllers
         public IEnumerable<UsersModel> GetAllUsers()
         { 
              
-            return _UserRepo.GetUsers(); // retruns all users as a list
+            return _UserRepo.GetObjects(); // retruns all users as a list
         }
         [Authorize]
         [Route("GetUser/{id}")]// user by id route
@@ -78,7 +75,7 @@ namespace Cloud_System_dev_ops.Controllers
                 return BadRequest();
             }// checks if is a valid id     
           
-            UsersModel User = _UserRepo.GetUser(id);// checks for user
+            UsersModel User = _UserRepo.GetObjects().FirstOrDefault(x => x.UserId == id);// checks for user
             return User; // retunrs users model
         }
 
@@ -87,7 +84,7 @@ namespace Cloud_System_dev_ops.Controllers
         [HttpGet]
         public bool GetIsActive(int id)
         {
-            UsersModel UserActive = _UserRepo.GetUser(id); //gets user by id 
+            UsersModel UserActive = _UserRepo.GetObjects().FirstOrDefault(x => x.UserId == id); //gets user by id 
             return UserActive.isActive;// returns is active paramiter
         }
         [Authorize(Policy = "Staffpol")]
@@ -100,7 +97,7 @@ namespace Cloud_System_dev_ops.Controllers
                 return BadRequest();
             }// checks valid user
             user.isActive = !user.isActive;// toggles is active
-            UsersModel activity = _UserRepo.EditUser(user);// creates new user model and passes through user
+            UsersModel activity = _UserRepo.UpdateObject(user);// creates new user model and passes through user
             return activity;// return the edited user
         }
     }
