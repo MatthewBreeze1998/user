@@ -226,5 +226,40 @@ namespace ControllerTest
             ActionResult usersResult = result.Result;// usersResult is result.Result
             Assert.AreEqual(usersResult.GetType(), typeof(BadRequestResult));// usersResult is if type badrequest
         }
+        [Test]
+        public void DeleteUser_valid_shouldObject()
+        {
+            Assert.IsNotNull(_userRepo);// check repos not null
+            Assert.IsNotNull(_userController);// checks controlle is not null 
+            UsersModel Deleteuser = new UsersModel() { UserId = 2, FirstName = "Shaun", LastName = "andrew", Email = "shaun_andrew@hotmail.com", isActive = false, PurchaseAbility = false };// user to update
+            Assert.IsNotNull(Deleteuser);// checks model is not null
+
+            ActionResult<UsersModel> getproduct = _userController.GetUser(Deleteuser.UserId);
+            Assert.IsNotNull(getproduct);// is nit null
+
+            ActionResult<UsersModel> product = _userController.DeleteUser(Deleteuser); // product is the return of DeleteProduct
+            Assert.IsNotNull(product);// product is not null 
+
+            ActionResult<UsersModel> result = _userController.GetUser(Deleteuser.UserId);// result is result of get product
+            Assert.IsNotNull(result);// is nit null
+
+            ActionResult userResult = result.Result;// staffresult is result.value
+            Assert.AreEqual(userResult.GetType(), typeof(BadRequestResult));// StaffResult is of type bad request 
+        }
+        [Test]
+        public void DeleteUser_invalid_shouldObject()
+        {
+            Assert.IsNotNull(_userRepo);// check repos not null
+            Assert.IsNotNull(_userController);// checks controlle is not null 
+            UsersModel DeleteUser = null;// null users
+            Assert.IsNull(DeleteUser);// checks is null
+
+            ActionResult<UsersModel> result = _userController.DeleteUser(DeleteUser);// calls delete fuction with null model 
+            Assert.IsNotNull(result);// result is not null
+
+            ActionResult userResult = result.Result;// StaffResult is result of result
+            Assert.AreEqual(userResult.GetType(), typeof(BadRequestResult));// StaffResult is of type bad request
+
+        }
     }
 }
