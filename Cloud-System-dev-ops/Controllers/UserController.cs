@@ -154,7 +154,6 @@ namespace Cloud_System_dev_ops.Controllers
             {
                 return Conflict();
             }
-
             return activity;// return the edited user
         }
     }
